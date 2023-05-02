@@ -115,7 +115,10 @@ def encodeImage(oa, ob, xmap = None, margins = (1, 1), alpha = None):
     return xa, fa
     
 def encodeText(oa, text, *args, **kwargs):
-    font = ImageFont.truetype("NotoSansCJK-Regular.ttc", oa.shape[0] // 7)
+    if "font" in kwargs:
+        font = ImageFont.truetype(kwargs["font"], oa.shape[0] // 7)
+    else:
+        font = ImageFont.load_default()
     #font = ImageFont.load_default()
     renderSize = font.getsize(text)
     padding = min(renderSize) * 2 // 10
@@ -124,7 +127,7 @@ def encodeText(oa, text, *args, **kwargs):
     draw = ImageDraw.Draw(textImg)
     draw.text((padding, padding), text, (255, 255, 255), font = font)
     ob = np.asarray(textImg)
-    return encodeImage(oa, ob, *args, **kwargs)
+    return encodeImage(oa, ob, *args)
     
 def decodeImage(xa, xmap = None, margins = (1, 1), oa = None, full = False):
     na = normalizedRGB(xa)
