@@ -115,7 +115,7 @@ def encodeImage(oa, ob, xmap = None, margins = (1, 1), alpha = None):
     return xa, fa
     
 def encodeText(oa, text, *args, **kwargs):
-    font = ImageFont.truetype("consola.ttf", oa.shape[0] // 7)
+    font = ImageFont.truetype("NotoSansCJK-Regular.ttc", oa.shape[0] // 7)
     #font = ImageFont.load_default()
     renderSize = font.getsize(text)
     padding = min(renderSize) * 2 // 10
@@ -174,7 +174,7 @@ def imsaveEx(fn, img, *args, **kwargs):
     pyplot.imsave(fn, img, *args, **kwargs)
     
     
-if __name__ == "__main__" or True:
+if __name__ == "__main__":
     argparser = argparse.ArgumentParser(description = 
         "Frequency domain image steganography/waterprint/signature.")
     argparser.add_argument("input", metavar = "file", 
